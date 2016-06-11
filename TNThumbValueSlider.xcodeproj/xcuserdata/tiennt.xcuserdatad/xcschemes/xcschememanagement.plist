@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>TNSlider.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>TNThumbValueSlider.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -23,6 +28,11 @@
 			<true/>
 		</dict>
 		<key>728214391D08A2E3008E1AC8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>72A8C3B81D0C6D3300DF08DF</key>
 		<dict>
 			<key>primary</key>
 			<true/>

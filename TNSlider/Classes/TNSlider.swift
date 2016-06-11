@@ -1,6 +1,6 @@
 //
-//  TNThumbValueSlider.swift
-//  TNThumbValueSlider
+//  TNSlider.swift
+//  TNSlider
 //
 //  Created by Tien on 6/9/16.
 //  Copyright © 2016 tiennth. All rights reserved.
@@ -8,14 +8,26 @@
 
 import UIKit
 
-public class TNThumbValueSlider: UIControl {
+public class TNSlider: UIControl {
     
     private var _value: Float = 0
     // default 0.0. this value will be pinned to min/max
     public var value: Float {
         set {
-            _value = newValue
-            trackLayer.value = _value
+//            if (newValue < _minimumValue) {
+//                _minimumValue = newValue
+//            } else if (newValue > _maximumValue) {
+//                _maximumValue = newValue
+//            }
+            if (newValue < _minimumValue) {
+                _value = _minimumValue
+            } else if (newValue > _maximumValue) {
+                _value = _maximumValue
+            } else {
+                _value = newValue
+            }
+            
+            reinitComponentValues()
             redrawLayers()
         }
         
@@ -27,8 +39,18 @@ public class TNThumbValueSlider: UIControl {
     private var _minimumValue: Float = 0 // default 0.0. the current value may change if outside new min value
     public var minimumValue: Float {
         set {
+            if (newValue > _maximumValue) {
+                _maximumValue = newValue
+            }
             _minimumValue = newValue
-            trackLayer.minimumValue = _minimumValue
+            
+            if (value < _minimumValue) {
+                _value = _minimumValue
+            } else if (_value > _maximumValue) {
+                _value = _maximumValue
+            }
+            
+            reinitComponentValues()
             redrawLayers()
         }
         
@@ -40,8 +62,18 @@ public class TNThumbValueSlider: UIControl {
     private var _maximumValue: Float = 1 // default 1.0. the current value may change if outside new max value
     public var maximumValue: Float {
         set {
+            if (newValue < _minimumValue) {
+                _minimumValue = newValue
+            }
             _maximumValue = newValue
-            trackLayer.maximumValue = _maximumValue
+            
+            if (value < _minimumValue) {
+                _value = _minimumValue
+            } else if (_value > _maximumValue) {
+                _value = _maximumValue
+            }
+            
+            reinitComponentValues()
             redrawLayers()
         }
         
@@ -50,15 +82,17 @@ public class TNThumbValueSlider: UIControl {
         }
     }
     
-    public var trackMinColor: UIColor? {
+    @IBInspectable public var trackMinColor: UIColor? {
         didSet {
             trackLayer.trackMinColor = trackMinColor
+            redrawLayers()
         }
     }
     
-    public var trackMaxColor: UIColor? {
+    @IBInspectable public var trackMaxColor: UIColor? {
         didSet {
             trackLayer.trackMaxColor = trackMaxColor
+            redrawLayers()
         }
     }
     
@@ -76,14 +110,14 @@ public class TNThumbValueSlider: UIControl {
     private let thumbWidth: CGFloat = 38
     
     
-    override init(frame: CGRect) {
+    required public override init(frame: CGRect) {
         continuous = true
         
         trackLayer = TNTrackLayer()
         thumbLayer = TNTextLayer()
         
         super.init(frame: frame)
-        
+        translatesAutoresizingMaskIntoConstraints = false
         layer.addSublayer(trackLayer)
         layer.addSublayer(thumbLayer)
         
@@ -97,7 +131,7 @@ public class TNThumbValueSlider: UIControl {
         thumbLayer = TNTextLayer()
         
         super.init(coder: aDecoder)
-        
+        translatesAutoresizingMaskIntoConstraints = false
         layer.addSublayer(trackLayer)
         layer.addSublayer(thumbLayer)
 
@@ -128,7 +162,7 @@ public class TNThumbValueSlider: UIControl {
         thumbLayer.masksToBounds = false
         thumbLayer.shadowOffset = CGSize(width: 0, height: 0.5)
         thumbLayer.shadowColor = UIColor.blackColor().CGColor
-        thumbLayer.shadowRadius = 1
+        thumbLayer.shadowRadius = 2
         thumbLayer.shadowOpacity = 0.125
         thumbLayer.shadowPath = UIBezierPath(roundedRect: thumbLayer.bounds, cornerRadius: thumbHeight / 2).CGPath
         
@@ -139,6 +173,14 @@ public class TNThumbValueSlider: UIControl {
     }
     
     // MARK: - Update functions
+    func reinitComponentValues() {
+        trackLayer.minimumValue = _minimumValue
+        trackLayer.maximumValue = _maximumValue
+        trackLayer.value = _value
+        
+        thumbLayer.string = textForValue(_value)
+    }
+    
     func redrawLayers() {
         thumbLayer.setNeedsDisplay()
         trackLayer.setNeedsDisplay()
@@ -150,7 +192,7 @@ public class TNThumbValueSlider: UIControl {
     }
    
     func updateLayersValue() {
-        thumbLayer.string = "\(Int(_value))"
+        thumbLayer.string = textForValue(_value)
         trackLayer.value = _value
     }
     
@@ -203,14 +245,27 @@ public class TNThumbValueSlider: UIControl {
     }
     
     public override func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
-        print("End")
         if !continuous {
             sendActionsForControlEvents(.ValueChanged)
         }
     }
     
+    // MARK: - Auto layout
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        trackLayer.frame = trackRectForBound(bounds)
+        commonInit()
+        updateLayersPosition()
+        redrawLayers()
+    }
+    
     // MARK: - Helper functions
     func trackRectForBound(bound: CGRect) -> CGRect {
         return CGRectMake(trackInset, (bound.size.height - trackHeight) / 2, bound.size.width - 2 * trackInset, trackHeight)
+    }
+    
+    func textForValue(value: Float) -> String {
+        return "\(Int(value))"
     }
 }

@@ -7,21 +7,28 @@
 //
 
 import UIKit
+import TNSlider
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var slider: TNSlider!
+    @IBOutlet weak var uislider: UISlider!
+    var timer: NSTimer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let slider = TNThumbValueSlider(frame: CGRect(x: 0, y: 100, width: view.frame.size.width, height: 40))
         slider.minimumValue = 100
         slider.maximumValue = 200
         slider.trackMinColor = UIColor.greenColor()
         slider.trackMaxColor = UIColor.blueColor()
-        slider.value = 0.5
         slider.userInteractionEnabled = true
         slider.addTarget(self, action: #selector(sliderValueChanged(_:)), forControlEvents: .ValueChanged)
-        view.addSubview(slider)
+        
+        uislider.value = -10
+        print(uislider.value)
+        
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(increaseProgressByOne), userInfo: nil, repeats: true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,7 +36,11 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func sliderValueChanged(sender: TNThumbValueSlider) {
+    func increaseProgressByOne() {
+        slider.value += 1
+    }
+    
+    func sliderValueChanged(sender: TNSlider) {
         print("Value: \(sender.value)")
     }
 

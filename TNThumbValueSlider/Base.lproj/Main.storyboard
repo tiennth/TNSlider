@@ -8,7 +8,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TNThumbValueSlider" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TNThumbValueSliderDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -17,20 +17,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="PSh-Yj-pnr">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="15" minValue="0.0" maxValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="PSh-Yj-pnr">
                                 <rect key="frame" x="-2" y="202" width="604" height="31"/>
                             </slider>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="69H-gN-22O" customClass="TNSlider" customModule="TNSlider">
+                                <rect key="frame" x="0.0" y="50" width="600" height="47"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="47" id="UHk-Zk-6La"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.96470588239999999" green="0.21960784310000001" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="PSh-Yj-pnr" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="182" id="4nx-9n-J59"/>
+                            <constraint firstItem="69H-gN-22O" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="E9u-eE-Maz"/>
+                            <constraint firstItem="69H-gN-22O" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="cP2-BJ-j6U"/>
+                            <constraint firstAttribute="trailing" secondItem="69H-gN-22O" secondAttribute="trailing" id="iro-E7-5CU"/>
                             <constraint firstItem="PSh-Yj-pnr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="mfI-ah-osL"/>
                             <constraint firstAttribute="trailing" secondItem="PSh-Yj-pnr" secondAttribute="trailing" id="wfq-gM-Idz"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="slider" destination="69H-gN-22O" id="8qa-w2-i4N"/>
+                        <outlet property="uislider" destination="PSh-Yj-pnr" id="SAf-if-qSM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="480" y="419"/>
         </scene>
     </scenes>
 </document>
