@@ -95,6 +95,20 @@ public class TNSlider: UIControl {
             redrawLayers()
         }
     }
+
+    @IBInspectable public var thumbBackgroundColor: UIColor = UIColor.whiteColor() {
+        didSet {
+            thumbLayer.backgroundColor = thumbBackgroundColor.CGColor
+            redrawLayers()
+        }
+    }
+    
+    @IBInspectable public var thumbTextColor: UIColor = UIColor.blackColor() {
+        didSet {
+            thumbLayer.foregroundColor = thumbTextColor.CGColor
+            redrawLayers()
+        }
+    }
     
     public var continuous: Bool // if set, value change events are generated any time the value changes due to dragging. default = YES
     
