@@ -14,24 +14,24 @@ class TNTrackLayer: CALayer {
     var trackMaxColor: UIColor?
     
     var value: Float = 0
-    var range: Float = 1
+    var minimumValue: Float = 0
+    var maximumValue: Float = 1
     
     override func drawInContext(ctx: CGContext) {
         let cornerRadius = bounds.height * 1/2
         
-        let trackMinRect = CGRect(x: 0, y: 0, width: bounds.size.width * CGFloat(value / range), height: bounds.size.height)
+        let range = maximumValue - minimumValue
+        let thresholdX = bounds.size.width * CGFloat((value - minimumValue) / range)
+        let trackMinRect = CGRect(x: 0, y: 0, width: thresholdX, height: bounds.size.height)
         let trackMinPath = UIBezierPath(roundedRect: trackMinRect, cornerRadius: cornerRadius)
         CGContextSetFillColorWithColor(ctx, trackMinColor?.CGColor)
         CGContextAddPath(ctx, trackMinPath.CGPath)
         CGContextFillPath(ctx)
         
-        let trackMaxRect = CGRect(x: bounds.size.width * CGFloat(value / range), y: 0, width: bounds.size.width * CGFloat(1 - value / range), height: bounds.size.height)
+        let trackMaxRect = CGRect(x: thresholdX, y: 0, width: bounds.size.width - thresholdX, height: bounds.size.height)
         let trackMaxPath = UIBezierPath(roundedRect: trackMaxRect, cornerRadius: cornerRadius)
         CGContextSetFillColorWithColor(ctx, trackMaxColor?.CGColor)
         CGContextAddPath(ctx, trackMaxPath.CGPath)
         CGContextFillPath(ctx)
-//        CGContextClip(ctx)
-        
-        
     }
 }

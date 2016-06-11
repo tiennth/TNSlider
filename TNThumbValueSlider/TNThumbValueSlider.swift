@@ -10,22 +10,52 @@ import UIKit
 
 public class TNThumbValueSlider: UIControl {
     
+    private var _value: Float = 0
     // default 0.0. this value will be pinned to min/max
     public var value: Float {
-        didSet {
-            trackLayer.value = value
+        set {
+            _value = newValue
+            trackLayer.value = _value
             redrawLayers()
+        }
+        
+        get {
+            return _value
         }
     }
     
-    public var minimumValue: Float // default 0.0. the current value may change if outside new min value
-    public var maximumValue: Float // default 1.0. the current value may change if outside new max value
+    private var _minimumValue: Float = 0 // default 0.0. the current value may change if outside new min value
+    public var minimumValue: Float {
+        set {
+            _minimumValue = newValue
+            trackLayer.minimumValue = _minimumValue
+            redrawLayers()
+        }
+        
+        get {
+            return _minimumValue
+        }
+    }
+    
+    private var _maximumValue: Float = 1 // default 1.0. the current value may change if outside new max value
+    public var maximumValue: Float {
+        set {
+            _maximumValue = newValue
+            trackLayer.maximumValue = _maximumValue
+            redrawLayers()
+        }
+        
+        get {
+            return _maximumValue
+        }
+    }
     
     public var trackMinColor: UIColor? {
         didSet {
             trackLayer.trackMinColor = trackMinColor
         }
     }
+    
     public var trackMaxColor: UIColor? {
         didSet {
             trackLayer.trackMaxColor = trackMaxColor
@@ -47,9 +77,6 @@ public class TNThumbValueSlider: UIControl {
     
     
     override init(frame: CGRect) {
-        value = 0.5
-        minimumValue = 0.0
-        maximumValue = 1.0
         continuous = true
         
         trackLayer = TNTrackLayer()
@@ -65,9 +92,6 @@ public class TNThumbValueSlider: UIControl {
     }
     
     required public init?(coder aDecoder: NSCoder) {
-        value = 0
-        minimumValue = 0.0
-        maximumValue = 1.0
         continuous = true
         trackLayer = TNTrackLayer()
         thumbLayer = TNTextLayer()
@@ -121,16 +145,17 @@ public class TNThumbValueSlider: UIControl {
     }
     
     func updateLayersPosition() {
-        let thumbCenterX = positionForValue(value)
+        let thumbCenterX = positionForValue(_value)
         thumbLayer.position = CGPoint(x: thumbCenterX, y: bounds.size.height / 2)
     }
    
     func updateLayersValue() {
-        thumbLayer.string = "\(Int(value))"
+        thumbLayer.string = "\(Int(_value))"
+        trackLayer.value = _value
     }
     
     func positionForValue(value: Float) -> CGFloat {
-        return usableTrackingLength * CGFloat((value - minimumValue) / (maximumValue - minimumValue)) + thumbWidth / 2
+        return usableTrackingLength * CGFloat((value - _minimumValue) / (_maximumValue - _minimumValue)) + thumbWidth / 2
     }
     
     // MARK: - Touch handling functions
@@ -149,34 +174,39 @@ public class TNThumbValueSlider: UIControl {
         let delta = touchPoint.x - previousTouchPoint.x
         let valueDelta = (maximumValue - minimumValue) * Float(delta / usableTrackingLength)
         
-        var tempValue = value + valueDelta
-        if (tempValue > maximumValue) {
-            tempValue = maximumValue
-        } else if (tempValue < minimumValue) {
-            tempValue = minimumValue
+        var tempValue = _value + valueDelta
+        if (tempValue > _maximumValue) {
+            tempValue = _maximumValue
+        } else if (tempValue < _minimumValue) {
+            tempValue = _minimumValue
         }
         
-        if (tempValue == value) {
+        if (tempValue == _value) {
             // Do nothing and return
             return true
         }
-        value = tempValue
-        print("Value: \(value)")
+        _value = tempValue
         previousTouchPoint = touchPoint
         
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         updateLayersPosition()
         updateLayersValue()
+        trackLayer.setNeedsDisplay()
         CATransaction.commit()
-        
-        sendActionsForControlEvents(.ValueChanged)
+
+        if continuous {
+            sendActionsForControlEvents(.ValueChanged)
+        }
         
         return true
     }
     
     public override func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
         print("End")
+        if !continuous {
+            sendActionsForControlEvents(.ValueChanged)
+        }
     }
     
     // MARK: - Helper functions

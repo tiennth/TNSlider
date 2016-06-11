@@ -20,6 +20,7 @@ class ViewController: UIViewController {
         slider.trackMaxColor = UIColor.blueColor()
         slider.value = 0.5
         slider.userInteractionEnabled = true
+        slider.addTarget(self, action: #selector(sliderValueChanged(_:)), forControlEvents: .ValueChanged)
         view.addSubview(slider)
     }
 
@@ -27,7 +28,10 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    func sliderValueChanged(sender: TNThumbValueSlider) {
+        print("Value: \(sender.value)")
+    }
 
 }
 
