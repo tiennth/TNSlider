@@ -14,6 +14,9 @@
 		728214291D08A2E3008E1AC8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 728214271D08A2E3008E1AC8 /* LaunchScreen.storyboard */; };
 		728214341D08A2E3008E1AC8 /* TNThumbValueSliderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728214331D08A2E3008E1AC8 /* TNThumbValueSliderTests.swift */; };
 		7282143F1D08A2E3008E1AC8 /* TNThumbValueSliderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7282143E1D08A2E3008E1AC8 /* TNThumbValueSliderUITests.swift */; };
+		7282144E1D08A341008E1AC8 /* TNThumbValueSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7282144D1D08A341008E1AC8 /* TNThumbValueSlider.swift */; };
+		728214501D09D3DC008E1AC8 /* TNTrackLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7282144F1D09D3DC008E1AC8 /* TNTrackLayer.swift */; };
+		72A8C3B31D0BBD0800DF08DF /* TNTextLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A8C3B21D0BBD0800DF08DF /* TNTextLayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +50,9 @@
 		7282143A1D08A2E3008E1AC8 /* TNThumbValueSliderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TNThumbValueSliderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7282143E1D08A2E3008E1AC8 /* TNThumbValueSliderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNThumbValueSliderUITests.swift; sourceTree = "<group>"; };
 		728214401D08A2E3008E1AC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7282144D1D08A341008E1AC8 /* TNThumbValueSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNThumbValueSlider.swift; sourceTree = "<group>"; };
+		7282144F1D09D3DC008E1AC8 /* TNTrackLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNTrackLayer.swift; sourceTree = "<group>"; };
+		72A8C3B21D0BBD0800DF08DF /* TNTextLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNTextLayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +103,7 @@
 		7282141D1D08A2E3008E1AC8 /* TNThumbValueSlider */ = {
 			isa = PBXGroup;
 			children = (
+				7282144C1D08A2EB008E1AC8 /* Classes */,
 				7282141E1D08A2E3008E1AC8 /* AppDelegate.swift */,
 				728214201D08A2E3008E1AC8 /* ViewController.swift */,
 				728214221D08A2E3008E1AC8 /* Main.storyboard */,
@@ -123,6 +130,16 @@
 				728214401D08A2E3008E1AC8 /* Info.plist */,
 			);
 			path = TNThumbValueSliderUITests;
+			sourceTree = "<group>";
+		};
+		7282144C1D08A2EB008E1AC8 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				7282144D1D08A341008E1AC8 /* TNThumbValueSlider.swift */,
+				7282144F1D09D3DC008E1AC8 /* TNTrackLayer.swift */,
+				72A8C3B21D0BBD0800DF08DF /* TNTextLayer.swift */,
+			);
+			name = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,6 +204,7 @@
 		728214131D08A2E3008E1AC8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = TN;
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = tiennth;
@@ -256,7 +274,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				728214501D09D3DC008E1AC8 /* TNTrackLayer.swift in Sources */,
+				72A8C3B31D0BBD0800DF08DF /* TNTextLayer.swift in Sources */,
 				728214211D08A2E3008E1AC8 /* ViewController.swift in Sources */,
+				7282144E1D08A341008E1AC8 /* TNThumbValueSlider.swift in Sources */,
 				7282141F1D08A2E3008E1AC8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -402,6 +423,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TNThumbValueSlider/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tiennth.TNThumbValueSlider;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -413,6 +435,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TNThumbValueSlider/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tiennth.TNThumbValueSlider;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -484,6 +507,7 @@
 				728214451D08A2E3008E1AC8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		728214461D08A2E3008E1AC8 /* Build configuration list for PBXNativeTarget "TNThumbValueSliderTests" */ = {
 			isa = XCConfigurationList;
@@ -492,6 +516,7 @@
 				728214481D08A2E3008E1AC8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		728214491D08A2E3008E1AC8 /* Build configuration list for PBXNativeTarget "TNThumbValueSliderUITests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +525,7 @@
 				7282144B1D08A2E3008E1AC8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
