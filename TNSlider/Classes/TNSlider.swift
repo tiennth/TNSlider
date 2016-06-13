@@ -110,7 +110,7 @@ public class TNSlider: UIControl {
         }
     }
     
-    public var continuous: Bool // if set, value change events are generated any time the value changes due to dragging. default = YES
+    @IBInspectable public var continuous: Bool // if set, value change events are generated any time the value changes due to dragging. default = YES
     
     private var trackLayer: TNTrackLayer
     private var thumbLayer: CATextLayer
@@ -184,6 +184,7 @@ public class TNSlider: UIControl {
     
     func commonInit() {
         usableTrackingLength = bounds.size.width - thumbWidth
+        translatesAutoresizingMaskIntoConstraints = false
     }
     
     // MARK: - Update functions
@@ -282,4 +283,5 @@ public class TNSlider: UIControl {
     func textForValue(value: Float) -> String {
         return "\(Int(value))"
     }
+    
 }
