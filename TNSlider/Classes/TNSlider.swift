@@ -275,6 +275,21 @@ public class TNSlider: UIControl {
         redrawLayers()
     }
     
+    public override func intrinsicContentSize() -> CGSize {
+        return CGSize(width: UIViewNoIntrinsicMetric, height: 31)
+    }
+    
+    public override func prepareForInterfaceBuilder() {
+        trackLayer.frame = trackRectForBound(bounds)
+        commonInit()
+        updateLayersPosition()
+        redrawLayers()
+    }
+    
+    override public class func requiresConstraintBasedLayout() -> Bool {
+        return true
+    }
+    
     // MARK: - Helper functions
     func trackRectForBound(bound: CGRect) -> CGRect {
         return CGRectMake(trackInset, (bound.size.height - trackHeight) / 2, bound.size.width - 2 * trackInset, trackHeight)

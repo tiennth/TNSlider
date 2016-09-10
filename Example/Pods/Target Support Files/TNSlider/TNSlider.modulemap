@@ -1,0 +1,6 @@
+framework module TNSlider {
+  umbrella header "TNSlider-umbrella.h"
+
+  export *
+  module * { export * }
+}

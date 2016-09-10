@@ -1,0 +1,16 @@
+PODS:
+  - TNSlider (0.1.0)
+
+DEPENDENCIES:
+  - TNSlider (from `../`)
+
+EXTERNAL SOURCES:
+  TNSlider:
+    :path: ../
+
+SPEC CHECKSUMS:
+  TNSlider: b7db3b7c289343ea6c575a2e9262210fd92025b3
+
+PODFILE CHECKSUM: ee85ab622ca84a0fc756d0bb6ccf40c3cca6bc35
+
+COCOAPODS: 1.0.1
