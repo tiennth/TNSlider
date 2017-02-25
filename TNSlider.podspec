@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TNSlider'
-  s.version          = '0.1.0'
+  s.version          = '0.2.0'
   s.summary          = 'A control like UISlider but show current value on the thumb.'
 
 # This description is used to generate tags and improve search results.
@@ -22,7 +22,7 @@ TNSlider is a control for selecting a single value from a continous range of val
                        DESC
 
   s.homepage         = 'https://github.com/tiennth/TNSlider'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  # s.screenshots     = 'https://github.com/tiennth/TNSlider/blob/master/Screenshot_1.png', 'https://github.com/tiennth/TNSlider/blob/master/Screenshot_2.png'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Tien Nguyen' => 'thanhtien2302@gmail.com' }
   s.source           = { :git => 'https://github.com/tiennth/TNSlider.git', :tag => s.version.to_s }
