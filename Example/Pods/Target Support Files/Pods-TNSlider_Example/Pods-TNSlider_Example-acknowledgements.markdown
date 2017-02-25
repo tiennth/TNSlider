@@ -3,7 +3,7 @@ This application makes use of the following third party libraries:
 
 ## TNSlider
 
-Copyright (c) 2017 Tien Nguyen <thanhtien2302@gmail.com>
+Copyright (c) 2016 Tien Nguyen <thanhtien2302@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

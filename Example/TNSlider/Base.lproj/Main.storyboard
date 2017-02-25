@@ -21,15 +21,9 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="Hpf-hu-0ft" customClass="TNSlider" customModule="TNSlider">
-                                <rect key="frame" x="16" y="269.5" width="343" height="128"/>
+                                <rect key="frame" x="16" y="186" width="343" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="trackMinColor">
-                                        <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="trackMaxColor">
-                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="value">
                                         <real key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
@@ -41,12 +35,29 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TNSlider" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dN0-H8-Tbh">
+                                <rect key="frame" x="152" y="52" width="71.5" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A custom slider that display current value on its thumb" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L0s-WN-k7o">
+                                <rect key="frame" x="24" y="113" width="327" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.66274509800000003" green="0.2666666667" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Hpf-hu-0ft" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="14e-au-aEK"/>
+                            <constraint firstItem="Hpf-hu-0ft" firstAttribute="top" secondItem="L0s-WN-k7o" secondAttribute="bottom" constant="32" id="3mq-07-2Sc"/>
+                            <constraint firstItem="L0s-WN-k7o" firstAttribute="top" secondItem="dN0-H8-Tbh" secondAttribute="bottom" constant="40" id="AcU-T0-z30"/>
+                            <constraint firstItem="dN0-H8-Tbh" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="32" id="F4I-cP-WCm"/>
+                            <constraint firstItem="L0s-WN-k7o" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="24" id="MIk-ZL-9Zu"/>
+                            <constraint firstAttribute="trailing" secondItem="L0s-WN-k7o" secondAttribute="trailing" constant="24" id="a8e-hv-nYv"/>
                             <constraint firstItem="Hpf-hu-0ft" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="16" id="ghe-u3-WNK"/>
                             <constraint firstAttribute="trailing" secondItem="Hpf-hu-0ft" secondAttribute="trailing" constant="16" id="lBM-LK-UAr"/>
+                            <constraint firstItem="dN0-H8-Tbh" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="sU7-wz-J12"/>
                         </constraints>
                     </view>
                 </viewController>
