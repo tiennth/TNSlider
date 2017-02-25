@@ -2,11 +2,12 @@
 //  ViewController.swift
 //  TNSlider
 //
-//  Created by Tien Nguyen on 09/10/2016.
-//  Copyright (c) 2016 Tien Nguyen. All rights reserved.
+//  Created by Tien Nguyen on 02/26/2017.
+//  Copyright (c) 2017 Tien Nguyen. All rights reserved.
 //
 
 import UIKit
+import TNSlider
 
 class ViewController: UIViewController {
 

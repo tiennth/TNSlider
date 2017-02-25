@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "summary": "A short description of TNSlider.",
   "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/<GITHUB_USERNAME>/TNSlider",
+  "homepage": "https://github.com/Tien Nguyen/TNSlider",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -12,7 +12,7 @@
     "Tien Nguyen": "thanhtien2302@gmail.com"
   },
   "source": {
-    "git": "https://github.com/<GITHUB_USERNAME>/TNSlider.git",
+    "git": "https://github.com/Tien Nguyen/TNSlider.git",
     "tag": "0.1.0"
   },
   "platforms": {

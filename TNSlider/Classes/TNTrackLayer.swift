@@ -17,21 +17,21 @@ class TNTrackLayer: CALayer {
     var minimumValue: Float = 0
     var maximumValue: Float = 1
     
-    override func drawInContext(ctx: CGContext) {
+    override func draw(in ctx: CGContext) {
         let cornerRadius = bounds.height * 1/2
         
         let range = maximumValue - minimumValue
         let thresholdX = bounds.size.width * CGFloat((value - minimumValue) / range)
         let trackMinRect = CGRect(x: 0, y: 0, width: thresholdX, height: bounds.size.height)
         let trackMinPath = UIBezierPath(roundedRect: trackMinRect, cornerRadius: cornerRadius)
-        CGContextSetFillColorWithColor(ctx, trackMinColor?.CGColor)
-        CGContextAddPath(ctx, trackMinPath.CGPath)
-        CGContextFillPath(ctx)
+        ctx.setFillColor((trackMinColor?.cgColor)!)
+        ctx.addPath(trackMinPath.cgPath)
+        ctx.fillPath()
         
         let trackMaxRect = CGRect(x: thresholdX, y: 0, width: bounds.size.width - thresholdX, height: bounds.size.height)
         let trackMaxPath = UIBezierPath(roundedRect: trackMaxRect, cornerRadius: cornerRadius)
-        CGContextSetFillColorWithColor(ctx, trackMaxColor?.CGColor)
-        CGContextAddPath(ctx, trackMaxPath.CGPath)
-        CGContextFillPath(ctx)
+        ctx.setFillColor((trackMaxColor?.cgColor)!)
+        ctx.addPath(trackMaxPath.cgPath)
+        ctx.fillPath()
     }
 }

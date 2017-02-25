@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0720"
+   LastUpgradeVersion = "0820"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -17,20 +17,6 @@
                BlueprintIdentifier = "607FACCF1AFB9204008FA782"
                BuildableName = "TNSlider_Example.app"
                BlueprintName = "TNSlider_Example"
-               ReferencedContainer = "container:TNSlider.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "607FACE41AFB9204008FA782"
-               BuildableName = "TNSlider_Tests.xctest"
-               BlueprintName = "TNSlider_Tests"
                ReferencedContainer = "container:TNSlider.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
