@@ -10,8 +10,8 @@ import UIKit
 
 class TNTrackLayer: CALayer {
     
-    var trackMinColor: UIColor?
-    var trackMaxColor: UIColor?
+    var trackMinColor: UIColor = TNConstants.trackMinColor
+    var trackMaxColor: UIColor = TNConstants.trackMaxColor
     
     var value: Float = 0
     var minimumValue: Float = 0
@@ -24,13 +24,13 @@ class TNTrackLayer: CALayer {
         let thresholdX = bounds.size.width * CGFloat((value - minimumValue) / range)
         let trackMinRect = CGRect(x: 0, y: 0, width: thresholdX, height: bounds.size.height)
         let trackMinPath = UIBezierPath(roundedRect: trackMinRect, cornerRadius: cornerRadius)
-        ctx.setFillColor((trackMinColor?.cgColor)!)
+        ctx.setFillColor(trackMinColor.cgColor)
         ctx.addPath(trackMinPath.cgPath)
         ctx.fillPath()
         
         let trackMaxRect = CGRect(x: thresholdX, y: 0, width: bounds.size.width - thresholdX, height: bounds.size.height)
         let trackMaxPath = UIBezierPath(roundedRect: trackMaxRect, cornerRadius: cornerRadius)
-        ctx.setFillColor((trackMaxColor?.cgColor)!)
+        ctx.setFillColor(trackMaxColor.cgColor)
         ctx.addPath(trackMaxPath.cgPath)
         ctx.fillPath()
     }

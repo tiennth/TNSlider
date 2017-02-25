@@ -82,28 +82,28 @@ public class TNSlider: UIControl {
         }
     }
     
-    @IBInspectable public var trackMinColor: UIColor? {
+    @IBInspectable public var trackMinColor: UIColor = TNConstants.trackMinColor {
         didSet {
             trackLayer.trackMinColor = trackMinColor
             redrawLayers()
         }
     }
     
-    @IBInspectable public var trackMaxColor: UIColor? {
+    @IBInspectable public var trackMaxColor: UIColor = TNConstants.trackMaxColor {
         didSet {
             trackLayer.trackMaxColor = trackMaxColor
             redrawLayers()
         }
     }
 
-    @IBInspectable public var thumbBackgroundColor: UIColor = UIColor.white {
+    @IBInspectable public var thumbBackgroundColor: UIColor = TNConstants.thumbBackgroundColor {
         didSet {
             thumbLayer.backgroundColor = thumbBackgroundColor.cgColor
             redrawLayers()
         }
     }
     
-    @IBInspectable public var thumbTextColor: UIColor = UIColor.black {
+    @IBInspectable public var thumbTextColor: UIColor = TNConstants.thumbTextColor {
         didSet {
             thumbLayer.foregroundColor = thumbTextColor.cgColor
             redrawLayers()
