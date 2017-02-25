@@ -6,9 +6,9 @@
 [![Platform](https://img.shields.io/cocoapods/p/TNSlider.svg?style=flat)](http://cocoapods.org/pods/TNSlider)
 
 ## Screenshot
-![TNSlider](https://github.com/tiennth/TNSlider/blob/master/Screenshot_1.png "Screenshot 1")
-![TNSlider](https://github.com/tiennth/TNSlider/blob/master/Screenshot_2.png "Screenshot 2")
 
+<img src='Screenshot_1.png' title='Screenshot 1' width='' alt='Screenshot 1' />
+<img src='Screenshot_2.png' title='Screenshot 2' width='' alt='Screenshot 2' />
 
 ## Example
 
