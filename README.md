@@ -10,7 +10,7 @@ TNSlider is a slider that show current value on the thumb
 ## Screenshot
 
 
-<img src='tnslider.gif' title='Demo' width='' alt='Demo' />
+<img src='Screenshot/tnslider.gif' title='Demo' width='' alt='Demo' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
