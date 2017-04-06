@@ -8,77 +8,52 @@
 
 import UIKit
 
+@IBDesignable
 public class TNSlider: UIControl {
     
-    private var _value: Float = 0
     // default 0.0. this value will be pinned to min/max
-    @IBInspectable public var value: Float {
-        set {
-//            if (newValue < _minimumValue) {
-//                _minimumValue = newValue
-//            } else if (newValue > _maximumValue) {
-//                _maximumValue = newValue
-//            }
-            if (newValue < _minimumValue) {
-                _value = _minimumValue
-            } else if (newValue > _maximumValue) {
-                _value = _maximumValue
-            } else {
-                _value = newValue
+    @IBInspectable public var value: Float = 0 {
+        didSet {
+            if (value < minimum) {
+                minimum = value
+            }
+            
+            if (value > maximum) {
+                maximum = value
             }
             
             reinitComponentValues()
             redrawLayers()
-        }
-        
-        get {
-            return _value
         }
     }
     
-    private var _minimumValue: Float = 0 // default 0.0. the current value may change if outside new min value
-    @IBInspectable public var minimumValue: Float {
-        set {
-            if (newValue > _maximumValue) {
-                _maximumValue = newValue
+    @IBInspectable public var minimum: Float = 0 {
+        didSet {
+            if (minimum > maximum) {
+                maximum = minimum
             }
-            _minimumValue = newValue
             
-            if (value < _minimumValue) {
-                _value = _minimumValue
-            } else if (_value > _maximumValue) {
-                _value = _maximumValue
+            if (value < minimum) {
+                value = minimum
             }
             
             reinitComponentValues()
             redrawLayers()
-        }
-        
-        get {
-            return _minimumValue
         }
     }
     
-    private var _maximumValue: Float = 1 // default 1.0. the current value may change if outside new max value
-    @IBInspectable public var maximumValue: Float {
-        set {
-            if (newValue < _minimumValue) {
-                _minimumValue = newValue
+    @IBInspectable public var maximum: Float = 1 {
+        didSet {
+            if (maximum < minimum) {
+                minimum = maximum
             }
-            _maximumValue = newValue
             
-            if (value < _minimumValue) {
-                _value = _minimumValue
-            } else if (_value > _maximumValue) {
-                _value = _maximumValue
+            if (value > maximum) {
+                value = maximum
             }
             
             reinitComponentValues()
             redrawLayers()
-        }
-        
-        get {
-            return _maximumValue
         }
     }
     
@@ -110,7 +85,10 @@ public class TNSlider: UIControl {
         }
     }
     
-    @IBInspectable public var continuous: Bool // if set, value change events are generated any time the value changes due to dragging. default = YES
+    // How often valueChanged be triggered.
+    // true: valueChanged will be called many times during thumb dragging.
+    // false: valueChanged will on called only one time when dragging finished.
+    @IBInspectable public var continuous: Bool = true // if set, value change events are generated any time the value changes due to dragging. default = YES
     
     private var trackLayer: TNTrackLayer
     private var thumbLayer: CATextLayer
@@ -165,7 +143,7 @@ public class TNSlider: UIControl {
     func initThumbLayer() {
         thumbLayer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         thumbLayer.bounds = CGRect(x: 0, y: 0, width: thumbWidth, height: thumbHeight)
-        thumbLayer.position = CGPoint(x: positionForValue(value: minimumValue), y: bounds.size.height / 2)
+        thumbLayer.position = CGPoint(x: positionForValue(value: minimum), y: bounds.size.height / 2)
         thumbLayer.foregroundColor = UIColor.black.cgColor
         thumbLayer.cornerRadius = thumbHeight / 2
         thumbLayer.fontSize = 11
@@ -189,11 +167,11 @@ public class TNSlider: UIControl {
     
     // MARK: - Update functions
     func reinitComponentValues() {
-        trackLayer.minimumValue = _minimumValue
-        trackLayer.maximumValue = _maximumValue
-        trackLayer.value = _value
+        trackLayer.minimumValue = minimum
+        trackLayer.maximumValue = maximum
+        trackLayer.value = value
         
-        thumbLayer.string = textForValue(_value)
+        thumbLayer.string = textForValue(value)
     }
     
     func redrawLayers() {
@@ -202,17 +180,17 @@ public class TNSlider: UIControl {
     }
     
     func updateLayersPosition() {
-        let thumbCenterX = positionForValue(value: _value)
+        let thumbCenterX = positionForValue(value: value)
         thumbLayer.position = CGPoint(x: thumbCenterX, y: bounds.size.height / 2)
     }
    
     func updateLayersValue() {
-        thumbLayer.string = textForValue(_value)
-        trackLayer.value = _value
+        thumbLayer.string = textForValue(value)
+        trackLayer.value = value
     }
     
     func positionForValue(value: Float) -> CGFloat {
-        return usableTrackingLength * CGFloat((value - _minimumValue) / (_maximumValue - _minimumValue)) + thumbWidth / 2
+        return usableTrackingLength * CGFloat((value - minimum) / (maximum - minimum)) + thumbWidth / 2
     }
     
     // MARK: - Touch handling functions
@@ -229,20 +207,20 @@ public class TNSlider: UIControl {
         
         let touchPoint = touch.location(in: self)
         let delta = touchPoint.x - previousTouchPoint.x
-        let valueDelta = (maximumValue - minimumValue) * Float(delta / usableTrackingLength)
+        let valueDelta = (maximum - minimum) * Float(delta / usableTrackingLength)
         
-        var tempValue = _value + valueDelta
-        if (tempValue > _maximumValue) {
-            tempValue = _maximumValue
-        } else if (tempValue < _minimumValue) {
-            tempValue = _minimumValue
+        var tempValue = value + valueDelta
+        if (tempValue > maximum) {
+            tempValue = maximum
+        } else if (tempValue < minimum) {
+            tempValue = minimum
         }
         
-        if (tempValue == _value) {
+        if (tempValue == value) {
             // Do nothing and return
             return true
         }
-        _value = tempValue
+        value = tempValue
         previousTouchPoint = touchPoint
         
         CATransaction.begin()
@@ -276,7 +254,7 @@ public class TNSlider: UIControl {
     }
     
     public override var intrinsicContentSize: CGSize {
-        return CGSize(width: UIViewNoIntrinsicMetric, height: 31)
+        return CGSize(width: 118, height: 31)
     }
     
     public override func prepareForInterfaceBuilder() {
