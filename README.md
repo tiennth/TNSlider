@@ -1,20 +1,30 @@
 # TNSlider
 
-[![CI Status](http://img.shields.io/travis/Tien Nguyen/TNSlider.svg?style=flat)](https://travis-ci.org/Tien Nguyen/TNSlider)
+
 [![Version](https://img.shields.io/cocoapods/v/TNSlider.svg?style=flat)](http://cocoapods.org/pods/TNSlider)
 [![License](https://img.shields.io/cocoapods/l/TNSlider.svg?style=flat)](http://cocoapods.org/pods/TNSlider)
 [![Platform](https://img.shields.io/cocoapods/p/TNSlider.svg?style=flat)](http://cocoapods.org/pods/TNSlider)
 
+TNSlider is a slider that show current value on the thumb
+
 ## Screenshot
 
-<img src='Screenshot_1.png' title='Screenshot 1' width='' alt='Screenshot 1' />
-<img src='Screenshot_2.png' title='Screenshot 2' width='' alt='Screenshot 2' />
+
+<img src='tnslider.gif' title='Demo' width='' alt='Demo' />
+
+GIF created with [LiceCap](http://www.cockos.com/licecap/).
+
+
 
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Requirements
+
+- iOS 8.0+
+- Xcode 8.0+
+- Swift 3.0+
 
 ## Installation
 
@@ -31,4 +41,24 @@ Tien Nguyen, thanhtien2302@gmail.com
 
 ## License
 
-TNSlider is available under the MIT license. See the LICENSE file for more info.
+TNSlider is available under the MIT license. 
+
+Copyright (c) 2016 Tien Nguyen <thanhtien2302@gmail.com>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
