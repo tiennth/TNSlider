@@ -8,8 +8,20 @@
 
 import UIKit
 
+protocol TNSliderDelegate: class {
+    func slider(_ slider: TNSlider, displayTextForValue value: Float) -> String
+}
+
 @IBDesignable
 public class TNSlider: UIControl {
+    
+    weak var delegate: TNSliderDelegate?
+    
+    // LOGGING
+    func log(_ msg: String) {
+//        print(msg)
+    }
+    //
     
     // default 0.0. this value will be pinned to min/max
     @IBInspectable public var value: Float = 0 {
@@ -29,6 +41,7 @@ public class TNSlider: UIControl {
     
     @IBInspectable public var minimum: Float = 0 {
         didSet {
+            log("Minimum didSet")
             if (minimum > maximum) {
                 maximum = minimum
             }
@@ -36,7 +49,7 @@ public class TNSlider: UIControl {
             if (value < minimum) {
                 value = minimum
             }
-            
+            log("Final minimum: \(minimum)")
             reinitComponentValues()
             redrawLayers()
         }
@@ -44,6 +57,7 @@ public class TNSlider: UIControl {
     
     @IBInspectable public var maximum: Float = 1 {
         didSet {
+            log("Maximum didSet")
             if (maximum < minimum) {
                 minimum = maximum
             }
@@ -51,9 +65,24 @@ public class TNSlider: UIControl {
             if (value > maximum) {
                 value = maximum
             }
-            
+            log("Final maximum: \(maximum)")
             reinitComponentValues()
             redrawLayers()
+        }
+    }
+    
+    // Step == 0 means disable snapping to value.
+    @IBInspectable public var step: Float = 0 {
+        didSet {
+            log("Step didSet")
+            if (step < 0) {
+                step = 0
+            }
+            if (step > maximum - minimum) {
+                maximum = minimum + step
+            }
+            
+            log("Final step \(step)")
         }
     }
     
@@ -95,6 +124,7 @@ public class TNSlider: UIControl {
     
     private var previousTouchPoint = CGPoint.zero
     private var usableTrackingLength: CGFloat = 0
+    private var pointsPerValueScale: CGFloat = 1
     
     private let trackHeight: CGFloat = 4
     private let trackInset: CGFloat = 0
@@ -171,7 +201,8 @@ public class TNSlider: UIControl {
         trackLayer.maximumValue = maximum
         trackLayer.value = value
         
-        thumbLayer.string = textForValue(value)
+        updateThumbLayersText()
+        updateThumbLayersPosition()
     }
     
     func redrawLayers() {
@@ -179,17 +210,30 @@ public class TNSlider: UIControl {
         trackLayer.setNeedsDisplay()
     }
     
-    func updateLayersPosition() {
+    func updateThumbLayersText() {
+        thumbLayer.string = textForValue(value)
+    }
+    
+    func updateThumbLayersPosition() {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        CATransaction.setAnimationDuration(0)
+        
         let thumbCenterX = positionForValue(value: value)
         thumbLayer.position = CGPoint(x: thumbCenterX, y: bounds.size.height / 2)
+        CATransaction.commit()
     }
    
     func updateLayersValue() {
-        thumbLayer.string = textForValue(value)
+        updateThumbLayersText()
         trackLayer.value = value
     }
     
     func positionForValue(value: Float) -> CGFloat {
+        if (minimum == maximum) {
+            return thumbWidth / 2
+        }
+        
         return usableTrackingLength * CGFloat((value - minimum) / (maximum - minimum)) + thumbWidth / 2
     }
     
@@ -220,15 +264,9 @@ public class TNSlider: UIControl {
             // Do nothing and return
             return true
         }
+        
         value = tempValue
         previousTouchPoint = touchPoint
-        
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
-        updateLayersPosition()
-        updateLayersValue()
-        trackLayer.setNeedsDisplay()
-        CATransaction.commit()
 
         if continuous {
             sendActions(for: .valueChanged)
@@ -238,6 +276,14 @@ public class TNSlider: UIControl {
     }
     
     public override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
+        super.endTracking(touch, with: event)
+        
+        // Snap to value
+        if step > 0 {
+            let noOfStep = (value/step).rounded(.toNearestOrEven)
+            value = noOfStep * step
+        }
+        
         if !continuous {
             sendActions(for: .valueChanged)
         }
@@ -249,7 +295,7 @@ public class TNSlider: UIControl {
         
         trackLayer.frame = trackRectForBound(bounds)
         commonInit()
-        updateLayersPosition()
+        updateThumbLayersPosition()
         redrawLayers()
     }
     
@@ -260,7 +306,7 @@ public class TNSlider: UIControl {
     public override func prepareForInterfaceBuilder() {
         trackLayer.frame = trackRectForBound(bounds)
         commonInit()
-        updateLayersPosition()
+        updateThumbLayersPosition()
         redrawLayers()
     }
     
@@ -270,7 +316,11 @@ public class TNSlider: UIControl {
     }
     
     func textForValue(_ value: Float) -> String {
-        return "\(Int(value))"
+        if let delegate = delegate {
+            return delegate.slider(self, displayTextForValue: value)
+        } else {
+            return String(format: "%.2f", value)
+        }
     }
     
 }
