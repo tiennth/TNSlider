@@ -1,0 +1,9 @@
+language: objective-c
+osx_image: xcode8
+xcode_project: TNSlider/TNSlider.xcodeproj
+
+script:
+  - set -o pipefail
+  - xcodebuild -version
+  - xcodebuild -showsdks
+  - xcodebuild build -project TNSlider/TNSlider.xcodeproj -scheme 'TNSlider' -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO

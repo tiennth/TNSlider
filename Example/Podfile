@@ -1,11 +1,5 @@
 use_frameworks!
 
-target 'TNSlider_Example' do
+target 'TNSliderExample' do
   pod 'TNSlider', :path => '../'
-
-  target 'TNSlider_Tests' do
-    inherit! :search_paths
-
-    
-  end
 end

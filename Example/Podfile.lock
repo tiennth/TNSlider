@@ -1,5 +1,5 @@
 PODS:
-  - TNSlider (0.1.0)
+  - TNSlider (0.2.0)
 
 DEPENDENCIES:
   - TNSlider (from `../`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  TNSlider: 0fc8d5c45ce8b25f54b921b9c206f41ce79ca1d2
+  TNSlider: 789066faa2dd906028cd109f177dd0edecac7336
 
-PODFILE CHECKSUM: ee85ab622ca84a0fc756d0bb6ccf40c3cca6bc35
+PODFILE CHECKSUM: 8b5b626a86d61c3b4f23324554e664077aa2f8d3
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.0
