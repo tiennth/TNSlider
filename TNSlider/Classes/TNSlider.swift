@@ -8,14 +8,14 @@
 
 import UIKit
 
-protocol TNSliderDelegate: class {
+@objc protocol TNSliderDelegate: class {
     func slider(_ slider: TNSlider, displayTextForValue value: Float) -> String
 }
 
 @IBDesignable
 public class TNSlider: UIControl {
     
-    weak var delegate: TNSliderDelegate?
+    @IBOutlet weak var delegate: TNSliderDelegate?
     
     // LOGGING
     func log(_ msg: String) {
