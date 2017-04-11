@@ -1,0 +1,12 @@
+language: objective-c
+osx_image: xcode8
+xcode_project: TNSlider/TNSlider.xcodeproj
+
+script:
+  - xcodebuild build -project TNSlider/TNSlider.xcodeproj -scheme 'Decodable-iOS' -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+
+script:
+  - set -o pipefail
+  - xcodebuild -version
+  - xcodebuild -showsdks
+  - xcodebuild -workspace Fusuma.xcworkspace -scheme FusumaExample -sdk iphonesimulator -destination 'OS=10.0,name=iPhone 6S Plus' ONLY_ACTIVE_ARCH=NO build
