@@ -8,6 +8,22 @@
 
 import UIKit
 
+extension String {
+    func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        
+        return boundingBox.height
+    }
+    
+    func width(withConstraintedHeight height: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        
+        return boundingBox.width
+    }
+}
+
 @objc public protocol TNSliderDelegate: class {
     func slider(_ slider: TNSlider, displayTextForValue value: Float) -> String
 }
@@ -17,6 +33,12 @@ public class TNSlider: UIControl {
     
     @IBOutlet weak public var delegate: TNSliderDelegate? {
         didSet {
+            //Get maximum value text length
+            if let maxText:String = self.delegate?.slider(self, displayTextForValue: self.maximum)
+            {
+                self.thumbWidth = maxText.width(withConstraintedHeight: self.thumbHeight, font: UIFont.systemFont(ofSize: 11.0)) + 2.0
+                self.initLayers()
+            }
             updateThumbLayersText()
         }
     }
@@ -133,7 +155,7 @@ public class TNSlider: UIControl {
     private let trackHeight: CGFloat = 4
     private let trackInset: CGFloat = 0
     private let thumbHeight: CGFloat = 16
-    private let thumbWidth: CGFloat = 38
+    private var thumbWidth: CGFloat = 38
     
     
     required public override init(frame: CGRect) {
