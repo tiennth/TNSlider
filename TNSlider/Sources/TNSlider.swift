@@ -37,7 +37,10 @@ public class TNSlider: UIControl {
             if let maxText:String = self.delegate?.slider(self, displayTextForValue: self.maximum)
             {
                 self.thumbWidth = maxText.width(withConstraintedHeight: self.thumbHeight, font: UIFont.systemFont(ofSize: 11.0)) + 2.0
-                self.initLayers()
+                thumbLayer.bounds = CGRect(x: 0, y: 0, width: thumbWidth, height: thumbHeight)
+                thumbLayer.position = CGPoint(x: positionForValue(value: minimum), y: bounds.size.height / 2)
+                thumbLayer.cornerRadius = thumbHeight / 2
+                thumbLayer.shadowPath = UIBezierPath(roundedRect: thumbLayer.bounds, cornerRadius: thumbHeight / 2).cgPath
             }
             updateThumbLayersText()
         }
