@@ -8,14 +8,18 @@
 
 import UIKit
 
-@objc protocol TNSliderDelegate: class {
+@objc public protocol TNSliderDelegate: class {
     func slider(_ slider: TNSlider, displayTextForValue value: Float) -> String
 }
 
 @IBDesignable
 public class TNSlider: UIControl {
     
-    @IBOutlet weak var delegate: TNSliderDelegate?
+    @IBOutlet weak public var delegate: TNSliderDelegate? {
+        didSet {
+            updateThumbLayersText()
+        }
+    }
     
     // LOGGING
     func log(_ msg: String) {
