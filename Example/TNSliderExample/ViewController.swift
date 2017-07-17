@@ -9,7 +9,7 @@
 import UIKit
 import TNSlider
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,TNSliderDelegate {
 
     @IBOutlet weak var slider: TNSlider!
     @IBOutlet weak var stepTextField: UITextField!
@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        slider.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -39,6 +40,10 @@ class ViewController: UIViewController {
     @IBAction func setStepButtonClicked(_ sender: UIButton) {
         slider.step = Float(stepTextField.text ?? "0") ?? 0
         print("Step - real value: \(slider.step)")
+    }
+    
+    func slider(_ slider: TNSlider, displayTextForValue value: Float) -> String {
+        return String(format: "%.2f%%", value)
     }
 }
 

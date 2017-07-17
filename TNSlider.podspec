@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'TNSlider'
-  s.version          = '0.2.0'
+  s.version          = '0.2.1'
   s.summary          = 'A control like UISlider but show current value on the thumb.'
   s.description      = "TNSlider is a control for selecting a single value from a continous range of values like UISlider. The different is TNSlider show current selected value on the indicator (or thumb), that make you have more room for your important contents but still let user know what is the selected value of the slider."
   s.homepage         = 'https://github.com/tiennth/TNSlider'
